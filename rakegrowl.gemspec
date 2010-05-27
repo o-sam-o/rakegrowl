@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rakegrowl}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sergio Gil P\303\251rez de la Manga - forked Sam Cavenagh"]
   s.date = %q{2010-05-27}
   s.email = %q{sgilperez@gmail.com - forked cavenaghweb@hotmail.com}
   s.extra_rdoc_files = ["README.md"]
-  s.files = ["LICENSE", "README.md", "spec", "lib/rakegrowl.rb"]
+  s.files = ["LICENSE", "README.md", "spec", "lib/rakegrowl.rb", "img/abort.png", "img/complete.png"]
   s.homepage = %q{http://github.com/o-sam-o/rakegrowl}
   s.rdoc_options = ["--main", "README.md"]
   s.require_paths = ["lib"]

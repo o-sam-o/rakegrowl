@@ -18,11 +18,18 @@ describe Rakegrowl::Growl do
   
   describe "notify" do
     
-    it "should call growlnotify with title and message" do
+    it "should call growlnotify with title, message and image" do
+      Rakegrowl::Growl.stub!(:`).with("which growlnotify").and_return("/wadus/bin/growlnotify\n")
+      Kernel.should_receive(:system).with("/wadus/bin/growlnotify -t \"wadus\" -m \"wadus wadus\" --image \"image_path\"").once
+      Rakegrowl::Growl.notify("wadus", "wadus wadus", 'image_path')
+    end
+    
+    it "should call growlnotify with title, message and no image" do
       Rakegrowl::Growl.stub!(:`).with("which growlnotify").and_return("/wadus/bin/growlnotify\n")
       Kernel.should_receive(:system).with("/wadus/bin/growlnotify -t \"wadus\" -m \"wadus wadus\"").once
       Rakegrowl::Growl.notify("wadus", "wadus wadus")
     end
+    
     
     it "should not call anything if growlnotify is not installed in the system" do
       Rakegrowl::Growl.stub!(:`).with("which growlnotify").and_return("\n")
@@ -42,28 +49,28 @@ describe "rakegrowl" do
   end
   
   it "should notify when the main task ends" do
-    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task main finished").once
+    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task main finished", Rakegrowl::COMPLETE_IMG).once
     run_tasks "main"
   end
   
   it "should not notify when a dependency task ends" do
-    Rakegrowl::Growl.should_not_receive(:notify).with("Rake", "Task pre finished")
+    Rakegrowl::Growl.should_not_receive(:notify).with("Rake", "Task pre finished", Rakegrowl::COMPLETE_IMG)
     run_tasks "main"    
   end
   
   it "should notify when each main task ends" do
-    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task main finished").once
-    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task main2 finished").once
+    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task main finished", Rakegrowl::COMPLETE_IMG).once
+    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task main2 finished", Rakegrowl::COMPLETE_IMG).once
     run_tasks "main", "main2"
   end
   
   it "should notify when a task fails" do
-    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task buggy failed")
+    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task buggy failed", Rakegrowl::ABORT_IMG)
     run_tasks "buggy"
   end
   
   it "should work with namespaced tasks" do
-    Rakegrowl::Growl.should_not_receive(:notify).with("Rake", "Task wadus:wadus finished").once
+    Rakegrowl::Growl.should_not_receive(:notify).with("Rake", "Task wadus:wadus finished", Rakegrowl::COMPLETE_IMG).once
     run_tasks "wadus:wadus"
   end
   

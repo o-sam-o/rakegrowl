@@ -15,7 +15,7 @@ task :default => ["spec"]
 spec = Gem::Specification.new do |s|
 
   s.name              = "rakegrowl"
-  s.version           = "0.2.1"
+  s.version           = "0.2.2"
   s.summary           = "Get Growled when your long running rake tasks finish"
   s.author            = "Sergio Gil Pérez de la Manga - forked Sam Cavenagh"
   s.email             = "sgilperez@gmail.com - forked cavenaghweb@hotmail.com"
@@ -25,7 +25,7 @@ spec = Gem::Specification.new do |s|
   s.extra_rdoc_files  = %w(README.md)
   s.rdoc_options      = %w(--main README.md)
 
-  s.files             = %w(LICENSE README.md) + Dir.glob("{spec,lib/**/*}")
+  s.files             = %w(LICENSE README.md) + Dir.glob("{spec,lib/**/*,img/*}")
   s.require_paths     = ["lib"]
 
   s.add_development_dependency("rspec")
