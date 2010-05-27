@@ -24,13 +24,52 @@ module Rakegrowl
     end
   end
   
+  def self.notify_fail(top_level_tasks)
+    Growl.notify "Rake", "Task #{top_level_tasks} failed"
+  end  
+  
+  class OutputCatcher
+    
+    attr_accessor :messages
+    
+    def initialize(out)
+      @out = out
+      @messages = []
+    end  
+    
+    def puts(message)
+      @messages << message
+      # Ensure no memory bloat
+      @messages.take(1) if @messages.size > 99
+      
+      @out.puts message
+    end  
+    
+    def method_missing(m, *args)
+      @out.send(m, *args)
+    end
+    
+    def respond_to?(*args)
+      @out.respond_to?(*args)
+    end    
+  end  
+  
 end
 
 Rake::Application.class_eval do
   def top_level_with_growl
+    #output_catcher = Rakegrowl::OutputCatcher.new($>)
+    #$> = output_catcher
+
     Rakegrowl.enhance_tasks
-    top_level_without_growl
+    begin
+      top_level_without_growl
+    rescue SystemExit
+      Rakegrowl.notify_fail(top_level_tasks)
+    end
   end
+  
+  
   alias_method :top_level_without_growl, :top_level
   alias_method :top_level, :top_level_with_growl
 end

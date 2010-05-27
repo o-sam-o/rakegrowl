@@ -15,11 +15,11 @@ task :default => ["spec"]
 spec = Gem::Specification.new do |s|
 
   s.name              = "rakegrowl"
-  s.version           = "0.2.0"
+  s.version           = "0.2.1"
   s.summary           = "Get Growled when your long running rake tasks finish"
-  s.author            = "Sergio Gil Pérez de la Manga"
-  s.email             = "sgilperez@gmail.com"
-  s.homepage          = "http://github.com/porras/rakegrowl"
+  s.author            = "Sergio Gil Pérez de la Manga - forked Sam Cavenagh"
+  s.email             = "sgilperez@gmail.com - forked cavenaghweb@hotmail.com"
+  s.homepage          = "http://github.com/o-sam-o/rakegrowl"
 
   s.has_rdoc          = true
   s.extra_rdoc_files  = %w(README.md)

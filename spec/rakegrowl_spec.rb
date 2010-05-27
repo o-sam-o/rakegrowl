@@ -58,7 +58,6 @@ describe "rakegrowl" do
   end
   
   it "should notify when a task fails" do
-    pending "Test written but not implemented still"
     Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task buggy failed")
     run_tasks "buggy"
   end
