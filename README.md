@@ -4,14 +4,20 @@ Do you recognize this situation? You run a `rake` task (for example, `rake spec`
 
 **rakegrowl** tells you when your rake tasks end via [Growl](http://growl.info/).
 
+_Fork:_
+Forked to add support for rake abort and display different growl images based on the rake outcome
+
 ## Installation
 
 You need to have [Growl](http://growl.info/) and `growlnotify` installed to get the notifications. Anyway, **rakegrowl** is harmless if there is no Growl.
 
-To install **rakegrowl**, which is packaged as a gem, you need to run:
+To install this fork of **rakegrowl**, you need to run:
 
-    sudo gem sources -a http://gemcutter.org # [if you haven't done it already]
-    sudo gem install rakegrowl
+    git clone git://github.com/o-sam-o/rakegrowl.git
+	cd rakegrowl/
+	rake gem
+	cd pkg/
+	gem install rakegrowl
   
 ## Usage
 
