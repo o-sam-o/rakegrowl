@@ -69,9 +69,28 @@ describe "rakegrowl" do
     run_tasks "buggy"
   end
   
+  it "should notify when a subtask fails" do
+    Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task call_multi_with_buggy failed", Rakegrowl::ABORT_IMG)
+    run_tasks "call_multi_with_buggy"
+  end  
+  
   it "should work with namespaced tasks" do
     Rakegrowl::Growl.should_not_receive(:notify).with("Rake", "Task wadus:wadus finished", Rakegrowl::COMPLETE_IMG).once
     run_tasks "wadus:wadus"
   end
+  
+  context 'running rspecs' do
+    it 'should output the spec counts on pass' do
+      pending
+      Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task passing_spec:spec finished\n1 example, 0 failures", Rakegrowl::COMPLETE_IMG).once
+      run_tasks "passing_spec:spec"    
+    end  
+    
+    it 'should output the spec counts on failure' do
+      pending
+      Rakegrowl::Growl.should_receive(:notify).with("Rake", "Task failing_spec:spec failed\n1 example, 1 failure", Rakegrowl::ABORT_IMG).once
+      run_tasks "failing_spec:spec"    
+    end    
+  end  
   
 end

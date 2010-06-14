@@ -1,3 +1,8 @@
+require "rubygems"
+
+require "spec"
+require "spec/rake/spectask"
+
 task :pre do
   "do pre"
 end
@@ -12,6 +17,20 @@ end
 
 task :buggy do
   raise "Wadus"
+end
+
+task :call_multi_with_buggy => [:main, :buggy]
+
+namespace :passing_spec do
+  Spec::Rake::SpecTask.new do |t|
+    t.spec_files = ["spec/spec_pass.rb"]
+  end
+end
+
+namespace :failing_spec do
+  Spec::Rake::SpecTask.new do |t|
+    t.spec_files = ["spec/spec_fail.rb"]
+  end
 end
 
 namespace :wadus do
