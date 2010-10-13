@@ -14,8 +14,8 @@ task :default => ["spec"]
 
 spec = Gem::Specification.new do |s|
 
-  s.name              = "rakegrowl"
-  s.version           = "0.2.3"
+  s.name              = "sam-rakegrowl"
+  s.version           = "0.2.4"
   s.summary           = "Get Growled when your long running rake tasks finish"
   s.author            = "Sergio Gil Pérez de la Manga - forked Sam Cavenagh"
   s.email             = "sgilperez@gmail.com - forked cavenaghweb@hotmail.com"

@@ -13,11 +13,7 @@ You need to have [Growl](http://growl.info/) and `growlnotify` installed to get 
 
 To install this fork of **rakegrowl**, you need to run:
 
-    git clone git://github.com/o-sam-o/rakegrowl.git
-	cd rakegrowl/
-	rake gem
-	cd pkg/
-	gem install rakegrowl
+  gem install sam-rakegrowl
   
 ## Usage
 
